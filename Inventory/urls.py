@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from .login import *
+from Login.views import home_url,logout_user
+
 
 urlpatterns = [
     # url('', include('django.contrib.auth.urls')),
-    # url(r'^$',home, name='home'),
+    url(r'^$',home_url, name='home_url'),
+    url(r'^logout/',logout_user,name='logout_user'),
+    url(r'^auth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
     url(r'^file_upload/$',include('FileUpload.urls')),
+    url(r'^login_path$', include('Login.urls')),
 ]

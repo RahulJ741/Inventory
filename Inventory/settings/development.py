@@ -19,7 +19,7 @@ DATABASES = {
 }
 
 
-ALLOWED_HOSTS = ['10.200.234.101']
+ALLOWED_HOSTS = ['10.200.234.101','localhost','127.0.0.1']
 
 # The URL where requests are redirected for login, especially when using the login_required() decorator.
 LOGIN_URL = "/"
