@@ -21,7 +21,7 @@ class RightsAccess(models.Model):
 class UsersRights(models.Model):
     """(UsersRights user and rights mapping)"""
     user = models.ForeignKey(User,on_delete = models.CASCADE)
-    right = models.ForeignKey(RightsAccess, on_delete = models.SET_NULL, null=True)
+    rights = models.ForeignKey(RightsAccess, on_delete = models.SET_NULL, null=True)
 
 
     class Admin:

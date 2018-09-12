@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^logout/',logout_user,name='logout_user'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
-    url(r'^file_upload/$',include('FileUpload.urls')),
-    url(r'^login_path$', include('Login.urls')),
+    url(r'^file_upload/',include('FileUpload.urls')),
+    url(r'^login_path/', include('Login.urls')),
 ]

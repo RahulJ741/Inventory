@@ -8,6 +8,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
+def home(request):
+    return render(request,'home.html')
+
 
 def add_group(request):
     return HttpResponse('asdfasdfasdfasdfasdfasdfasdfasd')
@@ -24,7 +27,7 @@ def home_url(request):
 def logout_user(request):
     try:
         login = Login_handle()
-        return login.logout(request)
+        return login.logout_user(request)
 
     except Exception as e:
         print "Exception occured in logout_user ",e
@@ -34,14 +37,14 @@ def logout_user(request):
 
 class Login_handle(object):
     """docstring for Login_handle. class that handles all the login functionalty"""
-    def __init__(self):
-        self.form = LoginForm()
+    # def __init__(self):
+        # self.form = LoginForm()
     #     super(Login_handle, self).__init__()
     #     self.arg = arg
 
 
     def render_template(self, request, template_name):
-        return render_to_response(template_name,{'form':self.form})
+        return render_to_response(template_name)
 
     def login(self, request):
         username = request.POST.get('username',None)
@@ -49,13 +52,14 @@ class Login_handle(object):
         remember_me = request.POST.get('remember_me',None)
 
         if username != None and password != None:
-            print username,password, ":;;;;;;;;;;;;;;;;;;;;;;;;//////////////////////////"
+            # print username,password, ":;;;;;;;;;;;;;;;;;;;;;;;;//////////////////////////"
             user = authenticate(username=username, password=password)
 
             if user is not None and user.is_active:
                 print ":::::::::::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
                 login(request, user)
-                return render(request,'home.html')
+                return HttpResponseRedirect('/login_path/home/')
+                # return render(request,'home.html')
             else:
                 return render_to_response('Error.html',{'Error_title':'User not found','Error_message': 'Username or password incorrect'})
 
@@ -64,5 +68,5 @@ class Login_handle(object):
             logout(request)
             return HttpResponseRedirect('/')
         except Exception as e:
-            print "Exception occured in logout_user ",e
+            print "Exception occured in logout_user ............ ",e
             return HttpResponse(status=500)
