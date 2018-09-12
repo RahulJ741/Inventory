@@ -10,6 +10,7 @@ from .forms import FileUploadForm
 def checkfile(request):
     form = FileUploadForm(widget=forms.FileInput(attrs={'accept':['application/pdf']}))
     return render(request,'file_upload.html', {'form':form})
+    
 
 
 
